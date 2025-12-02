@@ -1,99 +1,202 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cat Version</title>
   <link rel="icon" href="Cat Version Logo.png" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Remodelación: Cat Version</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: #ff9a32;
-      color: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+    :root{
+      --bg:#fff7f1;
+      --accent:#ff9a32;
+      --muted:#554b3a;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.6);
     }
-    h1 {
-      font-size: 2.2rem;
-      font-weight: 600;
-      margin-bottom: 10px;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Quicksand',sans-serif;
+      background:linear-gradient(180deg,var(--bg),#fff);
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
     }
-    p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin-bottom: 20px;
+    header{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      padding:20px 28px;
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      background:linear-gradient(90deg, rgba(255,154,50,0.06), transparent);
     }
-    #contador {
-      font-size: 2rem;
-      font-weight: 600;
-      background: rgba(255, 255, 255, 0.6);
-      padding: 15px 25px;
-      border-radius: 10px;
-      display: inline-block;
+    .brand{
+      display:flex;align-items:center;gap:12px;
+    }
+    .brand img{width:56px;height:56px;object-fit:contain;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+    .brand h1{margin:0;font-size:1.25rem;font-weight:700;color:#2b2118}
+    .tag{font-size:0.875rem;color:rgba(0,0,0,0.55)}
+
+    .container{max-width:1100px;margin:28px auto;padding:0 18px}
+
+    /* Search */
+    .search-wrap{display:flex;justify-content:space-between;gap:16px;align-items:center;margin:18px 0}
+    .search{
+      flex:1;display:flex;align-items:center;background:var(--card);padding:10px 12px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04)
+    }
+    .search input{flex:1;border:0;outline:none;font-size:1rem;background:transparent;padding:6px 8px}
+    .search button{border:0;background:var(--accent);color:white;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}
+
+    /* Filter chips */
+    .chips{display:flex;gap:8px;flex-wrap:wrap}
+    .chip{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:6px 10px;border-radius:999px;font-size:0.85rem;cursor:pointer}
+    .chip.active{background:var(--accent);color:#fff;border-color:transparent}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .card{background:var(--card);border-radius:14px;padding:14px;box-shadow:0 6px 20px rgba(43,33,24,0.06);display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center}
+    .avatar{width:160px;height:160px;border-radius:14px;overflow:hidden;display:block}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .name{font-weight:700;font-size:1.05rem;margin:0}
+    .role{font-size:0.9rem;color:rgba(0,0,0,0.6)}
+    .bio{font-size:0.85rem;color:rgba(0,0,0,0.55);margin-top:6px}
+
+    footer{padding:20px 28px;text-align:center;color:rgba(0,0,0,0.5);font-size:0.9rem;margin-top:28px}
+
+    /* Responsive tweaks */
+    @media (max-width:600px){
+      .brand h1{font-size:1rem}
+      .avatar{width:140px;height:140px}
     }
   </style>
 </head>
 <body>
-  <h1>Cat Version: Remodelación de la Web</h1>
-  <p>Estamos trabajando para que la nueva experiencia de Cat Version sea más adorable, completa y moderna. ¡Gracias por tu paciencia!</p>
-  
-  <div id="contador">Cargando...</div>
+  <header>
+    <div class="brand">
+      <img src="Cat Version Logo.png" alt="Cat Version logo" />
+      <div>
+        <h1>Cat Version</h1>
+        <div class="tag">Banda ficticia · Producción independiente</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <p style="margin:0 0 14px 0; font-size:1.05rem;">Bienvenido a la página oficial de <strong>Cat Version</strong>. Aquí puedes buscar a los integrantes, ver sus fotos y conocer el rol de cada uno en la banda. Usa el buscador para filtrar por nombre, rol o características.</p>
+    </section>
+
+    <section class="search-wrap">
+      <div class="search" role="search" aria-label="Buscar integrantes">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" style="opacity:0.6;margin-right:8px"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        <input id="searchInput" placeholder="Buscar por nombre o rol..." autocomplete="off" />
+        <button id="clearBtn" title="Borrar búsqueda">Limpiar</button>
+      </div>
+      <div class="chips" aria-hidden="false">
+        <button class="chip active" data-filter="all">Todos</button>
+        <button class="chip" data-filter="vocal">Vocal</button>
+        <button class="chip" data-filter="produccion">Producción</button>
+        <button class="chip" data-filter="instrumental">Instrumental</button>
+        <button class="chip" data-filter="jugueton">Juguetón</button>
+      </div>
+    </section>
+
+    <section class="grid" id="membersGrid">
+      <!-- Member cards (images must be in the repo root as PNG files) -->
+
+      <article class="card" data-name="CRC" data-role="líder vocal" data-tags="vocal">
+        <a class="avatar" href="#CRC"><img src="CRC.png" alt="CRC" /></a>
+        <h3 class="name">CRC</h3>
+        <div class="role">Líder · Vocal principal</div>
+        <div class="bio">El líder carismático de la banda. Siempre a cargo de la dirección artística y del escenario.</div>
+      </article>
+
+      <article class="card" data-name="Oreo" data-role="cofundador, guitarra" data-tags="instrumental">
+        <a class="avatar" href="#Oreo"><img src="Oreo.png" alt="Oreo" /></a>
+        <h3 class="name">Oreo</h3>
+        <div class="role">Cofundador · Guitarra</div>
+        <div class="bio">Hermano de CRC y cofundador. Responsable de melodías y armonías.</div>
+      </article>
+
+      <article class="card" data-name="Carey" data-role="bajo" data-tags="instrumental">
+        <a class="avatar" href="#Carey"><img src="Carey.png" alt="Carey" /></a>
+        <h3 class="name">Carey</h3>
+        <div class="role">Bajo · Nuevo integrante (desde 2025)</div>
+        <div class="bio">Aporta groove y ritmo; nuevo miembro que le da frescura al sonido.</div>
+      </article>
+
+      <article class="card" data-name="Tigrito" data-role="teclados, divertimento" data-tags="jugueton">
+        <a class="avatar" href="#Tigrito"><img src="Tigrito.png" alt="Tigrito" /></a>
+        <h3 class="name">Tigrito</h3>
+        <div class="role">Teclados · Energía en el escenario</div>
+        <div class="bio">El más juguetón; anima las presentaciones con juegos y sorpresas.</div>
+      </article>
+
+      <article class="card" data-name="Pelusa" data-role="producción" data-tags="produccion">
+        <a class="avatar" href="#Pelusa"><img src="Pelusa.png" alt="Pelusa" /></a>
+        <h3 class="name">Pelusa</h3>
+        <div class="role">Producción · Backstage</div>
+        <div class="bio">La productora detrás de la banda; organiza sesiones, mezcla y logística.</div>
+      </article>
+
+      <article class="card" data-name="Kiwi" data-role="extras, apoyo" data-tags="jugueton">
+        <a class="avatar" href="#Kiwi"><img src="Kiwi.png" alt="Kiwi" /></a>
+        <h3 class="name">Kiwi</h3>
+        <div class="role">Apoyo · El menor del grupo</div>
+        <div class="bio">Activo y curioso; siempre está ayudando y probando ideas nuevas.</div>
+      </article>
+
+    </section>
+
+    <footer>
+      © <span id="year"></span> Cat Version · Sitio no oficial · Todos los archivos de imagen deben estar en la raíz del repositorio (ej: <code>CRC.png</code>, <code>Cat Version Logo.png</code>)
+    </footer>
+  </main>
 
   <script>
-    // Fecha objetivo: 100 horas desde la última visita
-    const fechaFinal = new Date("2025-12-09T13:00:00"); // 100 horas
-    const claveLocalStorage = "catVersionCountdown";
+    // Insert current year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    function obtenerTiempoRestante() {
-      const ahora = Date.now();
-      let final;
+    // Simple, profesional search + filters (runs client-side)
+    const input = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearBtn');
+    const grid = document.getElementById('membersGrid');
+    const cards = Array.from(grid.querySelectorAll('.card'));
+    const chips = Array.from(document.querySelectorAll('.chip'));
 
-      // Si no existe en localStorage, crear el conteo
-      if (!localStorage.getItem(claveLocalStorage)) {
-        final = ahora + horasObjetivo * 60 * 60 * 1000;
-        localStorage.setItem(claveLocalStorage, final);
-      } else {
-        final = parseInt(localStorage.getItem(claveLocalStorage));
-      }
-
-      return final - ahora;
+    function normalize(text){
+      return (text||'').toString().toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,'');
     }
 
-    function actualizarContador() {
-    const ahora = new Date().getTime();
-    const distancia = fechaFinal - ahora;
-
-    if (distancia <= 0) {
-        document.getElementById("contador").innerHTML =
-            "¡La remodelación está completa!";
-        return;
+    function render(filterText, tagFilter){
+      const q = normalize(filterText);
+      cards.forEach(card=>{
+        const name = normalize(card.dataset.name);
+        const role = normalize(card.dataset.role);
+        const tags = (card.dataset.tags||'').split(',').map(s=>s.trim());
+        const matchesText = q === '' || name.includes(q) || role.includes(q) || tags.some(t => t.includes(q));
+        const matchesTag = !tagFilter || tagFilter === 'all' || tags.includes(tagFilter);
+        card.style.display = (matchesText && matchesTag) ? 'flex' : 'none';
+      })
     }
 
-    const horas = Math.floor(distancia / (1000 * 60 * 60));
-    const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+    input.addEventListener('input', ()=> render(input.value, document.querySelector('.chip.active').dataset.filter));
+    clearBtn.addEventListener('click', ()=>{ input.value=''; input.focus(); render('', document.querySelector('.chip.active').dataset.filter); });
 
-    document.getElementById("contador").innerHTML =
-        `${horas}h ${minutos}m ${segundos}s`;
-}
+    chips.forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        chips.forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+        const filter = chip.dataset.filter;
+        render(input.value, filter);
+      })
+    })
 
-      const horas = Math.floor(restante / (1000 * 60 * 60));
-      const minutos = Math.floor((restante % (1000 * 60 * 60)) / (1000 * 60));
-      const segundos = Math.floor((restante % (1000 * 60)) / 1000);
+    // initial render
+    render('', 'all');
 
-      document.getElementById("contador").innerHTML =
-        `${horas}h ${minutos}m ${segundos}s`;
-    }
-
-    setInterval(actualizarContador, 1000);
-    actualizarContador();
+    // Accessibility: Enter key on search performs nothing by default (prevents accidental form submission)
+    input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') e.preventDefault(); });
   </script>
 </body>
 </html>
