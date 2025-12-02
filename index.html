@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="icon" href="img/Cat Version Logo.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remodelación: Cat Version</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: #ff9a32;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-bottom: 20px;
+    }
+    #contador {
+      font-size: 2rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 15px 25px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cat Version: Remodelación de la Web</h1>
+  <p>Estamos trabajando para que la nueva experiencia de Cat Version sea más adorable, completa y moderna. ¡Gracias por tu paciencia!</p>
+  
+  <div id="contador">Cargando...</div>
+
+  <script>
+    // Fecha objetivo: 100 horas desde la última visita
+    const horasObjetivo = 100; // 100 horas
+    const claveLocalStorage = "catVersionCountdown";
+
+    function obtenerTiempoRestante() {
+      const ahora = Date.now();
+      let final;
+
+      // Si no existe en localStorage, crear el conteo
+      if (!localStorage.getItem(claveLocalStorage)) {
+        final = ahora + horasObjetivo * 60 * 60 * 1000;
+        localStorage.setItem(claveLocalStorage, final);
+      } else {
+        final = parseInt(localStorage.getItem(claveLocalStorage));
+      }
+
+      return final - ahora;
+    }
+
+    function actualizarContador() {
+      const restante = obtenerTiempoRestante();
+
+      if (restante <= 0) {
+        document.getElementById("contador").innerHTML = "¡La remodelación está completa!";
+        return;
+      }
+
+      const horas = Math.floor(restante / (1000 * 60 * 60));
+      const minutos = Math.floor((restante % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((restante % (1000 * 60)) / 1000);
+
+      document.getElementById("contador").innerHTML =
+        `${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    setInterval(actualizarContador, 1000);
+    actualizarContador();
+  </script>
+</body>
+</html>
